@@ -60,6 +60,7 @@ print(6 // 4) # returns 1.0
 
 print(12 % 4.5) # remainder (modulo) operator gives 3.0
 '''
+How modulo operator works? 
     a. 12 // 4.5 gives 2.0; 
     b. 2.0 * 4.5 gives 9.0; 
     c. 12 - 9.0 gives 3.0
@@ -68,8 +69,18 @@ print(-4 + 4) # addition gives 0
 print(-4. + 8) # addition gives 4.0
 print(-4 - 4) # subtraction gives -8
 print(4. - 8) # subtraction gives -4.0
-
-
 print(9 % 6 % 2) # left - sided binding gives result 1
 print(2 ** 2 ** 3) # 256 - exponentiation operator uses right-sided binding.
 ```
+
+# Variables
+
+```python
+
+# Python is case-sensitive
+Import=10 # valid variable name import vs Import 
+Adiós_Señora="d" # valid. can contain latin letters.
+
+10t=110 # invalid. should not begin with letter.
+Ex Rate=19.20 # invalid. should not contain space.
+
