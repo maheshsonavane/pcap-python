@@ -38,3 +38,36 @@ print(type(True)) # returns <class 'bool'>
 print(None) # used to represent the absence of a value. 
 print(type(None)) # returns <class 'NoneType'>
 ```
+# Operators
+
+[Operator priorities](\img\operators-priority.JPG)
+
+```python
+print(2 ** 3) # exponentiation (power) operator
+print(2 * 3) # multiplication operator
+print(6 / 2) # division operator - result is always float.
+'''
+ integer division / floor division
+    - the results are always rounded to lesser integer.
+    - integer by integer division gives an integer result.  
+    - All other cases produce floats.
+'''
+print(6 // 2) 
+print(6. // -4) # returns -2.0 
+print(6 // 4) # returns 1.0 
+
+print(12 % 4.5) # remainder (modulo) operator gives 3.0
+'''
+    a. 12 // 4.5 gives 2.0; 
+    b. 2.0 * 4.5 gives 9.0; 
+    c. 12 - 9.0 gives 3.0
+'''
+print(-4 + 4) # addition gives 0
+print(-4. + 8) # addition gives 4.0
+print(-4 - 4) # subtraction gives -8
+print(4. - 8) # subtraction gives -4.0
+
+
+print(9 % 6 % 2) # left - sided binding gives result 1
+print(2 ** 2 ** 3) # 256 - exponentiation operator uses right-sided binding.
+```
