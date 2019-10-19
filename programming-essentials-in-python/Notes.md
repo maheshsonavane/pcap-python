@@ -40,7 +40,9 @@ print(type(None)) # returns <class 'NoneType'>
 ```
 # Operators
 
-[Operator priorities](\img\operators-priority.JPG)
+Operators Priority
+
+![operators-priority](https://user-images.githubusercontent.com/45288730/67143194-e21c9780-f279-11e9-85ef-4baec185d605.JPG)
 
 ```python
 print(2 ** 3) # exponentiation (power) operator
