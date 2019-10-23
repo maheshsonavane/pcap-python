@@ -83,4 +83,45 @@ Adiós_Señora="d" # valid. can contain latin letters.
 
 10t=110 # invalid. should not begin with letter.
 Ex Rate=19.20 # invalid. should not contain space.
+```
 
+# Talk to Computer
+
+## `input():` 
+- result of the input() function is a `string`.
+
+```python
+print("Enter Value = ")
+var  = input()
+var  = input("Enter Value")
+
+# Type casting
+anything = float(input("Enter a number: "))
+# or
+anything = int(input("Enter a number: "))
+something = anything ** 2.0
+```
+
+## `String opertors:`
+
+```python
+# Concatenation (string + string)
+a = "mahesh" + "sonavane"
+
+''' 
+Replication :
+    string * number 
+    number * string
+'''
+a = "mahesh" * 2
+```
+## `Type Conversion:`
+
+```python
+# int()
+A = int(input("Enter Value for A"))
+# float()
+B = float(input("Enter Value for B"))
+# str()
+print("b = "+ str(B))
+```
