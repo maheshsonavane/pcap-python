@@ -37,6 +37,7 @@ Mahesh
 )
 
 # range() function for loops
+range(start, stop, step)
 range(100) # gives range from 0 to 99
 range(2,8) # gives range from 2 to 7
 range(2, 8, 3) # gives step range like 2, 5
