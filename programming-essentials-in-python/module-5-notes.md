@@ -83,3 +83,39 @@ print(platform(0, 1))
 ```
 
 # Packages
+
+![packages](https://user-images.githubusercontent.com/45288730/67940611-7c22ff00-fbed-11e9-86a9-21a7f3295593.JPG)
+
+## `What happens when we import module`:
+
+- When Python imports a module for the first time, it translates its contents into a somewhat `compiled shape`. The file doesn't contain `machine code` - it's internal Python `semi-compiled code`, ready to be executed by `Python's interpreter`.
+
+- As effect of this, python compiled file (PYC) is created under `pycache` folder. Every subsequent import will go quicker than interpreting the source text from scratch.
+
+- When a module is imported, its content is `implicitly executed by Python`.
+
+- Python creates a variable called `__name__`.
+    - when you run a file directly, its `__name__` variable is set to `__main__`;
+    - when a file is imported as a module, its `__name__` variable is set to the file's name (excluding .py)
+<br/>
+
+    ```
+    Imagine the following context:
+
+    - there is a module named mod1;
+    - there is a module named mod2 which contains the import mod1 instruction;
+    - there is a main file containing the import mod1 and import mod2 instructions.
+
+    At first glance, you may think that mod1 will be imported twice 
+    Fortunately, only the first import occurs. 
+    Python remembers the imported modules and silently omits all subsequent imports.
+    ```
+
+## `how Python searches for modules`:
+
+![moduleimportspath](https://user-images.githubusercontent.com/45288730/67944026-e25f5000-fbf4-11e9-9357-bae249dc41f7.JPG)
+
+`__init__.py`: Package initialization
+
+![packageinit](https://user-images.githubusercontent.com/45288730/67945786-33714300-fbf9-11e9-9c52-c205c5e667a4.JPG)
+
