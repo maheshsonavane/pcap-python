@@ -230,4 +230,162 @@ print(platform(0, 1))
     print(x)
     ```
 
+# Strings - immutable sequences
 
+```python
+# multiline strings 
+multiLine = '''Line #1
+Line #2'''
+print(len(multiLine))
+multiLine = """Line #1
+Line #2"""
+print(len(multiLine))
+
+# ord() - know a specific character's ASCII/UNICODE code point value
+ch1 = 'a' 
+ch2 = ' ' # space
+print(ord(ch1)) # 97
+print(ord(ch2)) # 32
+
+# chr() - takes a code point and returns its character.
+print(chr(97)) # a
+print(chr(945)) # α
+```
+
+### `Sequence operations` 
+- Iterating
+- Slicing 
+- checking character in string `in` and `not in`
+- min()
+- `immutable` - not allowed to use the `del`, `append()`,`insert()` instructions on string.
+
+```python
+exampleString = 'silly walks'
+for ch in exampleString:
+    print(ch, end=' ')
+print()
+
+alpha = "abdefg"
+print(alpha[1:3]) # bd
+print("f" not in alpha) # True
+
+print(min("aAbByYzZ")) # gives A because ACSII code point is is less
+
+print("dsfds".index("d")) # index of the first occurrence of "d"-->0
+
+# count() and list()
+print(list("abcabc"))
+print("abcabc".count("b"))
+```
+
+
+### `String methods`
+
+```python
+
+# capitalize()
+print("Alpha".capitalize())
+print('ALPHA'.capitalize())
+print(' Alpha'.capitalize())
+print('123'.capitalize())
+print("αβγδ".capitalize(
+
+# center()
+print('[' + 'Beta'.center(2) + ']')
+print('[' + 'Beta'.center(4) + ']')
+print('[' + 'Beta'.center(6) + ']')
+print('[' + 'gamma'.center(20, '*') + ']')
+
+# endswith()
+t = "zeta"
+print(t.endswith("a"))
+print(t.endswith("A"))
+print(t.endswith("et"))
+print(t.endswith("eta"))
+
+# find() 
+t = 'theta'
+print(t.find('eta'))
+print(t.find('et'))
+print(t.find('the'))
+print(t.find('ha'))
+txt = """A variation of the ordinary lorem ipsum
+text has been used in typesetting since the 1960s 
+or earlier, when it was popularized by advertisements 
+for Letraset transfer sheets. It was introduced to 
+the Information Age in the mid-1980s by the Aldus Corporation, 
+which employed it in graphics and word-processing templates
+for its desktop publishing program PageMaker (from Wikipedia)"""
+
+fnd = txt.find('the')
+while fnd != -1:
+    print(fnd)
+    fnd = txt.find('the', fnd + 1)
+
+print('kappa'.find('a', 1, 4)) # 1
+print('kappa'.find('a', 2, 4)) # -1 
+
+# isalnum()
+t = 'Six lambdas'
+print(t.isalnum()) # False 
+t = 'ΑβΓδ'
+print(t.isalnum()) # True
+t = '20E1'
+print(t.isalnum()) # True
+
+# isalpha() and isdigit()
+
+print("Moooo".isalpha()) # True
+print('Mu40'.isalpha()) # False
+
+print('2018'.isdigit()) # True
+print("Year2019".isdigit()) # False
+
+# join()
+print(",".join(["omicron", "pi", "rho"]))
+
+# lstrip()
+print("[" + " tau ".lstrip() + "]") # [tau]
+print("www.cisco.com".lstrip("w.")) # cisco.com
+print("pythoninstitute.org".lstrip(".org")) # pythoninstitute.org
+
+# replace()
+print("www.netacad.com".replace("netacad.com", "pythoninstitute.org"))
+print("This is it!".replace("is", "are"))
+print("Apple juice".replace("juice", ""))
+print("This is it!".replace("is", "are", 1))
+print("This is it!".replace("is", "are", 2))
+
+
+# my own split function
+def mysplit(strng):
+    if strng.isspace() or strng == '':
+        return []
+    a = []
+    temp = ""
+    for i in strng.strip():
+        if not i.isspace():
+            temp += i
+        else: 
+            a.append(temp)
+            temp = ""
+    a.append(temp)
+    return a
+
+print(mysplit("To be or not to be, this is a question"))
+print(mysplit("To be or not to be,this is a question"))
+print(mysplit("   "))
+print(mysplit(" abc "))
+print(mysplit(""))
+```
+
+
+### `String comparisons`
+
+```python
+'10' == 10 # False
+'10' != 10 # True
+'10' == 1 # Flase
+'10' != 1 # True
+'10' > 10 # TypeError exception
+```
