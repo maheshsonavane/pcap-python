@@ -119,3 +119,115 @@ print(platform(0, 1))
 
 ![packageinit](https://user-images.githubusercontent.com/45288730/67945786-33714300-fbf9-11e9-9c52-c205c5e667a4.JPG)
 
+# Exceptions
+
+- Python 3 defines `63 built-in` exceptions, and all of them form a tree-shaped hierarchy.
+
+    ![exception-hie](https://user-images.githubusercontent.com/45288730/68067868-c5e32500-fd66-11e9-8949-251a51661e06.JPG)
+
+    <br/>
+    - Example - Below all there snippets produces same output.
+
+    ```python
+    # Detail Level
+    try:
+        y = 1 / 0
+    except ZeroDivisionError:
+        print("Oooppsss...")
+
+    print("THE END.")
+
+    # Generic Level
+    try:
+        y = 1 / 0
+    except ArithmeticError:
+        print("Oooppsss...")
+
+    print("THE END.")
+
+    # More Generic Level
+    try:
+        y = 1 / 0
+    except Exception:
+        print("Oooppsss...")
+
+    print("THE END.")
+    ```
+- the order of the branches matters!
+- don't put more general exceptions before more concrete ones;
+- this will make the latter one unreachable and useless;
+- moreover, it will make your code messy and inconsistent;
+- Python won't generate any error messages regarding this issue.
+
+
+    ```python
+    try:
+        y = 1 / 0
+    except ArithmeticError:
+        print("Arithmetic problem!")
+    except ZeroDivisionError:
+        print("Zero Division!")
+
+    print("THE END.")
+
+    # The exception is the same, but the more general exception is now listed first
+    # it will catch all zero divisions too.
+    # It also means that there's no chance that any exception hits the ZeroDivisionError branch. 
+    # This branch is now completely unreachable.
+
+    ```
+- handle two or more exceptions 
+    ```python
+    try:
+        :
+    except (exc1, exc2):
+        :
+    ```
+- Exception handling in Functions
+
+    ![exception-handling-in-functions](https://user-images.githubusercontent.com/45288730/68067978-c8467e80-fd68-11e9-9180-219087e34a6d.JPG)
+
+- Raising exceptions: `raise exception` v `raise`
+
+    ```python
+    # Option 1 - raise exception
+
+    def badFun(n):
+        raise ZeroDivisionError
+
+    try:
+        badFun(0)
+    except ArithmeticError:
+        print("What happened? An error?")
+    print("THE END.")
+
+    # Option 2 - raise 
+    def badFun(n):
+    try:
+        return n / 0
+    except:
+        print("I did it again!")
+        raise # to be used inside the except branch only.
+
+    try:
+        badFun(0)
+    except ArithmeticError:
+        print("I see!")
+
+    print("THE END.")
+    ```
+- `assert` instruction
+    a concrete exception raised by the assert instruction when its argument evaluates to `False`, `None`, `0`, or an empty string.
+
+    ```python
+    import math
+
+    x = float(input("Enter a number: "))
+    assert x >= 0.0
+
+    x = math.sqrt(x)
+
+    print(x)
+    ```
+
+
