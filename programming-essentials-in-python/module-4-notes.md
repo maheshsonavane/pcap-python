@@ -47,7 +47,7 @@
     <b>Example:</b><br/><br/>
     ```python
     def subtra(a, b):
-    print(a - b)
+        print(a - b)
 
     subtra(5, b=2)    # outputs: 3
     subtra(a=5, 2)    # Syntax Error
@@ -68,6 +68,11 @@
     - A situation like this activates a mechanism called shadowing:
         - parameter x shadows any variable of the same name, but...
         - ... only inside the function defining the parameter.
+
+## `lambda functions`:
+- syntax: `lambda arguments : expression`<br/>
+![lambda functions](https://user-images.githubusercontent.com/45288730/68529064-ec2f3480-0313-11ea-9a0d-5555b702a231.JPG)
+
 
 # Returning a result from a function
 
@@ -189,7 +194,7 @@
 - the `len()` function works for dictionaries, too - it returns the numbers of key-value elements in the dictionary;
 - a dictionary is a `one-way tool` - if you have an English-French dictionary, you can look for French equivalents of English terms, but not vice versa.
 - dictionaries are not lists - they `don't preserve the order of their data`.
-- In Python 3.6x dictionaries have become ordered collections by default.
+- ** In Python 3.6x dictionaries have become ordered collections by default.
 - The order in which a dictionary stores its data is completely out of your control.
 
 ## `Browsing Dictionaries`
@@ -200,25 +205,36 @@
     dict = {"cat" : "chat", "dog" : "chien", "horse" : "cheval"}
 
     for key in dict.keys():
-        print(key, "->", dict[key]
+        print(key, "->", dict[key])
     ```
 - `items()`: returns a list of tuples where each tuple is a key-value pair. <br/><br/>
 
     ```python
     dict = {"cat" : "chat", "dog" : "chien", "horse" : "cheval"}
 
-    for english, french in dict.items():
-        print(english, "->", french)
+    for key, value in dict.items():
+        print(key, "->", value)
     ```
 - `values()`: returns a list of values. <br/><br/>
 
     ```python
     dict = {"cat" : "chat", "dog" : "chien", "horse" : "cheval"}
 
-    for french in dict.values():
-        print(french)
+    for value in dict.values():
+        print(value)
     ```
+- `__iter__()`:  should iterate over the keys.
 
+    ```python
+    dict = { 'a': 1, 'b': 2, 'c': 3 } 
+    for item in dict: 
+        print(item)
+
+    # output
+    a
+    b
+    c
+    ```
 ## `modifying and adding values`
 
 ```python

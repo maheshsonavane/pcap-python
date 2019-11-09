@@ -101,10 +101,23 @@ anything = float(input("Enter a number: "))
 anything = int(input("Enter a number: "))
 something = anything ** 2.0
 ```
+## `String comparisons`
+
+- We can use ( > , < , <= , <= , == , !=  ) to compare two strings. Python compares string lexicographically i.e using ASCII value of the characters.
+
+<b>Example</b>
+Suppose you have `str1` as `"Mary"`  and `str2` as `"Mac"`. The first two characters from `str1`  and `str2` ( M and M ) are compared. As they are equal, the second two characters are compared. Because they are also equal, the third two characters (r and c ) are compared. And because r has greater ASCII value than c , `str1` is greater than `str2`.
+
+<b>ASCII Table:</b>
+
+- `0-9` is `048 to 057`
+- `A-Z` is `65 to 90`
+- `a-z` is `097 to 122`
 
 ## `String opertors:`
 
 ```python
+
 # Concatenation (string + string)
 a = "mahesh" + "sonavane"
 

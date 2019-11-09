@@ -177,4 +177,96 @@ print(hasattr(ExampleClass, 'a')) # True
 ```
 # OOP: Methods
 
-### ``
+### `Constructor`:
+
+- cannot return a value, as it is designed to return a newly created object and nothing else;
+- cannot be invoked directly either from the object or from inside the class
+
+```python
+class Classy:
+    def __init__(self, value):
+        self.var = value
+
+obj1 = Classy("object")
+
+print(obj1.var)
+```
+
+
+
+
+
+
+`__init__(self,[optional parameters])`
+`__str__(self)`
+`issubclass(ClassOne, ClassTwo)`
+- The function returns True if ClassOne is a subclass of ClassTwo, and False otherwise
+- each class is considered to be a subclass of itself.
+
+`isinstance(objectName, ClassName)`
+- whether it is an object of a certain class or not.
+
+`objectOne `is` objectTwo`
+
+- operator checks whether two variables (objectOne and objectTwo here) refer to the same object.
+
+`super().__init__(name)`
+
+`Multiple inheritance`
+- occurs when a class has more than one superclass
+- Python looks for object components in the following order:
+    - inside the object itself;
+    - in its superclasses, `from bottom to top`
+    - if there is more than one class on a particular inheritance path, Python scans them from `left to right`.
+
+`polymorphism`
+
+- situation in `which the subclass is able to modify its superclass behavior (just like in the example) is called polymorphism`
+- The method, redefined in any of the superclasses, thus changing the behavior of the superclass, is called `virtual`.
+
+
+# Generators 
+
+- iterator must provide two methods:
+    - `__iter__()` which should return the object itself and which is invoked once.
+    - `__next__()` which is intended to return the next value (first, second, and so on) of the desired series - it will be invoked by the for/in statements in order to pass through the next iteration; if there are no more values to provide, the method should raise the `StopIteration` exception.<br/><br/>
+
+    ```python
+    class Mahesh:
+        def __init__(self, nn):
+            #print("__init__")
+            self.__n = nn
+            self.__i = 0
+            self.__p1 = self.__p2 = 1
+
+        def __iter__(self):
+            #print("__iter__")		
+            return self
+
+        def __next__(self):
+            #print("__next__")				
+            self.__i += 1
+            if self.__i > self.__n:
+                raise StopIteration
+            if self.__i in [1, 2]:
+                return 1
+            ret = self.__p1 + self.__p2
+            self.__p1, self.__p2 = self.__p2, ret
+            return ret
+
+    for i in Mahesh(10):
+        print(i,sep=" ")
+    ```
+
+- `yield`:
+    - Turns the function into generator.
+
+    ```python
+    def fun(n):
+        for i in range(n):
+            yield i
+
+    for v in fun(5):
+        print(v)
+    ```
+    

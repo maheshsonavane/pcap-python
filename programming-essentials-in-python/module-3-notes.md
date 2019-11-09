@@ -56,6 +56,25 @@ for i in range(6):
 else:
     print("else:", i)
 ```
+## `for i in range()` imp:
+
+```python
+
+presidents = ["Washington", "Adams", "Jefferson", "Madison", "Monroe", "Adams", "Jackson"]
+for i in range(len(presidents)):
+    
+    print("President {}: {}".format(i + 1, presidents[i]))
+    # modifying the value of counter variable has no impact.
+    i = 5.0
+    i = "dsfafds"
+
+i = 0
+while i < len(presidents):
+    print("President {}: {}".format(i + 1, presidents[i]))
+    i += 1
+    # TypeError: '<' not supported between instances of 'str' and 'int'
+    i = "sfaadfasd" 
+```
 
 # Lists
 
@@ -116,6 +135,7 @@ lst.reverse()
 ## `Slicing`:
 - to copy a list or part of the list, you can do it by performing `slicing`
 - can use negative indices to perform slices
+
 ```python
 myList = [10, 8, 6, 4, 2]
 newList = myList[1:3]
@@ -139,6 +159,19 @@ print(myList) # returns [].
 myList = [10, 8, 6, 4, 2]
 del myList
 print(myList) # error
+```
+## `Reversing Lists and Strings`:
+
+```python
+str1 = "ABCDE"
+print(str1[::-1])
+
+l1 = [10,20,30,40]
+print(l1[::-1])
+
+# can specify start as well
+str1 = "ABCDE"
+print(str1[:2:-1]) # returns ED
 ```
 ## `Adding list ?`
 
@@ -165,5 +198,7 @@ odds = [x for x in squares if x % 2 != 0 ]
 # Two dimensional array
 # The inner part creates a row, and the outer part builds a list of rows.
 board = [[EMPTY for i in range(8)] for j in range(8)]
+lst = [[c for c in range(r)] for r in range(3)]
+# gives [[], [0], [0, 1]]
 
 ```
