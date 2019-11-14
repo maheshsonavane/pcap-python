@@ -215,6 +215,13 @@ print(platform(0, 1))
         print("I see!")
 
     print("THE END.")
+
+    ## raise exception with message
+    try: 
+        print("Hello") 
+        raise Exception("Error")
+    except Exception as e: 
+        print(e)
     ```
 - `assert` instruction
     a concrete exception raised by the assert instruction when its argument evaluates to `False`, `None`, `0`, or an empty string.

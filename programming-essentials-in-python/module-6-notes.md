@@ -270,3 +270,177 @@ print(obj1.var)
         print(v)
     ```
     
+# Files
+
+```python
+#windows only with escape character
+name = "\\dir\\file" 
+#windows + linux
+name = "/dir/file" 
+name = "/dir/file"
+name = "c:/dir/file"
+```
+
+
+## `File Streams`
+
+- default mode is `rt`.<br/><br/>
+
+    ![modes](https://user-images.githubusercontent.com/45288730/68545849-734edc00-03ea-11ea-9f1f-c07212477e3c.JPG)
+
+- `rt` - read 
+  - the file must exist and readable.
+- `wt` - write
+    - if file doesn't exist it will be created 
+    - if it exists, it will be truncated. (erased)
+- `a` - append
+
+    - if file doesn't exist, it will be created; 
+    - if it exists the `file pointer` i.e virtual recording head will be set at the end of the file.
+- `r+` - read and update
+    - file must exist and has to be writeable.
+    - both `read and write` operations are allowed for the stream.
+
+- `w+` - write and update
+    - if file doesn't exist, it will be created
+    - the previous content of the file remains untouched;
+    - both `read and write` operations are allowed for the stream.
+
+- `x` - exclusive creation.
+    - If the file already exists, the open() function will raise an exception.
+    - You can also open a file for its exclusive creation
+
+- `UnsupportedOperation`, which inherits `OSError` and `ValueError`, and comes from the `io` module.
+
+
+
+
+## `bytearray`:
+
+- Amorphous data is data which have no specific shape or form - they are just a series of bytes.
+- specialized class Python uses to store amorphous data.
+- mutable, 
+- they're a subject of the len() function, 
+- conventional indexing is possible
+- `IMP` - you mustn't set any byte array elements with a value which is not an integer. violating this rule will cause a `TypeError` exception.
+- not allowed to assign a value that doesn't come from the range `0` to `255` inclusive.
+- 
+```python
+data = bytearray(100) # bytearray object able to store ten bytes.
+
+
+data = bytearray(10)
+print(data) # bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+print(len(data)) #10
+```
+### `writing byetarray to file`
+
+- The `write()` method returns a number of successfully written bytes.
+    ```python
+    from os import strerror
+    data = bytearray(10)
+    try:
+        bf = open('file.bin', 'wb')
+        bf.write(data)
+        bf.close()
+    except IOError as e:
+        print("I/O error occurred:", strerr(e.errno))
+    ```
+### `readinto(b)` - read bytes from a stream
+- Read bytes into a pre-allocated, writable bytes-like object b, and return the number of bytes read.
+
+    ```python
+    from os import strerror
+
+    data = bytearray(10)
+
+    try:
+        bf = open('file.bin', 'rb')
+        bf.readinto(data)
+        bf.close()
+
+        for b in data:
+            print(hex(b), end=' ')
+    except IOError as e:
+        print("I/O error occurred:", strerr(e.errno))
+    ```
+### `read()` - read bytes from a stream
+- Read all the contents of the file into the `memory.`
+- don't use this kind of read if you're not sure that the file's contents will fit the available memory.
+
+
+    ```python
+    from os import strerror
+
+    try:
+        bf = open('file.bin', 'rb')
+        data = bytearray(bf.read())
+        bf.close()
+
+        for b in data:
+            print(hex(b), end=' ')
+
+    except IOError as e:
+        print("I/O error occurred:", strerr(e.errno))
+    ```
+### `read(n)` - read bytes from a stream
+- If the read() method is invoked with an argument, it specifies the maximum number of bytes to be read.
+
+
+    ```python
+    try:
+        bf = open('file.bin', 'rb')
+        data = bytearray(bf.read(5))
+        bf.close()
+
+        for b in data:
+            print(hex(b), end=' ')
+
+    except IOError as e:
+        print("I/O error occurred:", strerr(e.errno))
+    ```
+
+# Tasks
+
+### `Character frequency histogram`:
+
+Read file and count characters
+
+```python
+a -> 1
+b -> 2
+c -> 1
+```
+### `Character frequency histogram`:
+
+Read file and count characters
+
+```python
+a -> 1
+b -> 2
+c -> 1
+```
+
+
+### Marks 
+
+Read file and show marks for stduents
+
+sample input file
+
+```python
+
+John	Smith	5
+Anna	Boleyn	4.5
+John	Smith	2
+Anna	Boleyn	11
+Andrew	Cox	1.5
+```
+
+sample output file
+
+```python
+Andrew Cox 	 1.5
+Anna Boleyn 	 15.5
+John Smith 	 7.0
+```
