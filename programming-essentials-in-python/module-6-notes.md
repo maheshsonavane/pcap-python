@@ -177,7 +177,7 @@ print(hasattr(ExampleClass, 'a')) # True
 ```
 # OOP: Methods
 
-### `Constructor`:
+## `Constructor`:
 
 - cannot return a value, as it is designed to return a newly created object and nothing else;
 - cannot be invoked directly either from the object or from inside the class
@@ -192,22 +192,59 @@ obj1 = Classy("object")
 print(obj1.var)
 ```
 
-`__init__(self,[optional parameters])`
-`__str__(self)`
+## `Key methods`
+
+`__str__()` 
+- describe s the object by returning string
+
 `issubclass(ClassOne, ClassTwo)`
 - The function returns True if ClassOne is a subclass of ClassTwo, and False otherwise
 - each class is considered to be a subclass of itself.
 
 `isinstance(objectName, ClassName)`
 - whether it is an object of a certain class or not.
+- objects can be considered as instance of all superclasses.
 
 `objectOne `is` objectTwo`
-
 - operator checks whether two variables (objectOne and objectTwo here) refer to the same object.
 
-`super().__init__(name)`
+`super().__init__()` vs `ClassName.__init__(self)`
 
-`Multiple inheritance`
+
+## `Class Methods`:
+
+- must have `(self)` parameter.
+- calling a private function:
+    ```python
+    obj = Classy()    
+    obj._Classy__hidden()
+    ```
+- abstract method
+
+    ![abstract-class](https://user-images.githubusercontent.com/45288730/68864154-11ec7d00-070a-11ea-8dae-802423065d54.PNG)
+
+
+## `Built in Properties`:
+- `__name__`
+- `__dict__`
+- `__module__`
+- `__bases__`
+
+### `Reflection & Introspection`
+- `getattr(ObjectName,property)`
+- `setattr(ObjectName,property,value)`
+
+## `Inheritance`
+- `Single inheritance`
+    - simple
+    - can be multi-level
+- `Multiple inheritance`
+    - <b>Diamond</b> problem may cause `MRO` (Method Resolution Error)
+    - Subclass has more than one Super classes.
+- `Object composition`
+    - Preferred over multiple inheritance.
+    - `polymorphism` can be achieved better.
+    - One Super class is used by more than one sub class.
 - occurs when a class has more than one superclass
 - Python looks for object components in the following order:
     - inside the object itself;
@@ -218,9 +255,6 @@ print(obj1.var)
 
 - situation in `which the subclass is able to modify its superclass behavior (just like in the example) is called polymorphism`
 - The method, redefined in any of the superclasses, thus changing the behavior of the superclass, is called `virtual`.
-
-
-# Class Hierarchy
 
 # Exceptions:
 
