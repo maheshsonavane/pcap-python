@@ -192,11 +192,6 @@ obj1 = Classy("object")
 print(obj1.var)
 ```
 
-
-
-
-
-
 `__init__(self,[optional parameters])`
 `__str__(self)`
 `issubclass(ClassOne, ClassTwo)`
@@ -225,7 +220,131 @@ print(obj1.var)
 - The method, redefined in any of the superclasses, thus changing the behavior of the superclass, is called `virtual`.
 
 
-# Generators 
+# Class Hierarchy
+
+# Exceptions:
+
+## `else` block:
+
+- code labelled in this way is executed when (and only when) no exception has been raised inside the `try:` part.
+    ```python
+    def reciprocal(n):
+        try:
+            n = 1 / n
+        except ZeroDivisionError:
+            print("Division failed")
+            return None
+        else:
+            print("Everything went fine")
+            return n
+
+    print(reciprocal(2))
+    print(reciprocal(0))
+
+    # Outputs
+    Everything went fine
+    0.5
+    Division failed
+    None
+    ```
+
+## `finally` block:
+
+- always executed 
+
+    ```python
+    def reciprocal(n):
+        try:
+            n = 1 / n
+        except ZeroDivisionError:
+            print("Division failed")
+            n = None
+        else:
+            print("Everything went fine")
+        finally:
+            print("It's time to say goodbye")
+            return n
+
+    print(reciprocal(2))
+    print(reciprocal(0))
+
+    # Outputs
+    Everything went fine
+    It's time to say good bye
+    0.5
+    Division failed
+    It's time to say good bye
+    None
+    ```
+
+## `args` property:
+
+- property of `BaseException` class
+- tuple designed to gather all arguments passed to the class constructor.
+- don't count the `self` argument here.
+
+    ```python
+    try:
+        raise Exception
+    except Exception as e:
+        print(e, e.__str__(), sep=' : ' ,end=' : ')
+        print(e.args)
+
+    try:
+        raise Exception("my exception")
+    except Exception as e:
+        print(e, e.__str__(), sep=' : ', end=' : ')
+        print(e.args)
+
+    try:
+        raise Exception("my", "exception")
+    except Exception as e:
+        print(e, e.__str__(), sep=' : ', end=' : ')
+        print(e.args)
+    
+    #Output
+     :  : ()
+    my exception : my exception : ('my exception',)
+    ('my', 'exception') : ('my', 'exception') : ('my', 'exception')
+    ```
+
+## `User Defined Exceptions`
+- Created by defining your own, new exceptions as subclasses derived from predefined ones. 
+- If you want to create an exception which will be utilized as a specialized case of any built-in exception, derive it from just this one. 
+
+- If you want to build your own hierarchy, and don't want it to be closely connected to Python's exception tree, derive it from any of the top exception classes, like Exception
+
+    ```python
+    class PizzaError(Exception):
+        def __init__(self, pizza, message):
+            Exception.__init__(self, message)
+            self.pizza = pizza
+
+
+    class TooMuchCheeseError(PizzaError):
+        def __init__(self, pizza, cheese, message):
+            PizzaError.__init__(self, pizza, message)
+            self.cheese = cheese
+
+    def makePizza(pizza, cheese):
+        if pizza not in ['margherita', 'capricciosa', 'calzone']:
+            raise PizzaError(pizza, "no such pizza on the menu")
+        if cheese > 100:
+            raise TooMuchCheeseError(pizza, cheese, "too much cheese")
+        print("Pizza ready!")
+
+
+    for (pz, ch) in [('calzone', 0), ('margherita', 110), ('mafia', 20)]:
+        try:
+            makePizza(pz, ch)
+        except TooMuchCheeseError as tmce:
+            print(tmce, ':', tmce.cheese)
+        except PizzaError as pe:
+            print(pe, ':', pe.pizza)
+    ```
+# Generators / Iterators
+
+- piece of specialized code able to produce a series of values, and to control the iteration process.
 
 - iterator must provide two methods:
     - `__iter__()` which should return the object itself and which is invoked once.
@@ -258,8 +377,9 @@ print(obj1.var)
         print(i,sep=" ")
     ```
 
-- `yield`:
-    - Turns the function into generator.
+## `yield`:
+- Turns the function into generator.
+- function should not be invoked explicitly
 
     ```python
     def fun(n):
@@ -269,7 +389,136 @@ print(obj1.var)
     for v in fun(5):
         print(v)
     ```
+
+## `list comprehensions`:
+```python
+listOne = []
+
+for ex in range(6):
+    listOne.append(10 ** ex)
+
+
+listTwo = [10 ** ex for ex in range(6)]
+
+print(listOne)
+print(listTwo)
+
+## Outputs
+[1, 10, 100, 1000, 10000, 100000]
+[1, 10, 100, 1000, 10000, 100000]
+
+## Example 2 - conditional instruction
+lst = []
+
+for x in range(10):
+    lst.append(1 if x % 2 == 0 else 0)
+
+print(lst)
+
+lst2 = [1 if x % 2 ==0 else 0 for x in range(10)]
+print(lst2)
+## Outputs
+[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+```
+## `turn any comprehension into a generator`:
+
+- turn any comprehension into a generator.
+- `[]` The brackets make a `comprehension`.
+- `()` The parentheses make a `generator`.
+
+    ```python
+    lst = [1 if x % 2 == 0 else 0 for x in range(10)]
+    genr = (1 if x % 2 == 0 else 0 for x in range(10))
+
+    for v in lst:
+        print(v, end=" ")
+    print()
+
+    for v in genr:
+        print(v, end=" ")
+    print()
+    ```
+## `lambda` - an anonymous function
+
+`lambda parameters : expression`
+
+    ```python
+    two = lambda : 2 # anonymous parameterless function
+    sqr = lambda x : x * x # one-parameter anonymous function
+    pwr = lambda x, y : x ** y # takes two parameters
+
+    for a in range(-2, 3):
+        print(sqr(a), end=" ")
+        print(pwr(a, two()))
+    ```
+
+`Whats the benefit`
+
+![lambda functions2](https://user-images.githubusercontent.com/45288730/68836958-f9ae3b00-06d4-11ea-9484-d920557712f5.PNG)
+
+`map(function, list)`
+
+`map()` function applies the function passed by its first argument to all its second argument's elements, and returns an `iterator` delivering all subsequent function results.
+
+- the second argument `list` may be any entity that can be iterated (e.g., a tuple, or just a generator)
+- `map()` can accept more than two arguments.
+    ```python
+    list1 = [x for x in range(5)]
+    list2 = list(map(lambda x: 2 ** x, list1))
+    print(list2)
+    for x in map(lambda x: x * x, list2):
+        print(x, end=' ')
+    print()
+    ``` 
+`filter()`
+
+`filter()` function filters its second argument while being guided by directions flowing from the function specified as the first argument.
+
+The elements which return `True` from the function pass the filter - the others are rejected.
+
+```python
+from random import seed, randint
+seed()
+data = [ randint(-10,10) for x in range(5) ]
+filtered = list(filter(lambda x: x > 0 and x % 2 == 0, data))
+print(data)
+print(filtered)
+
+# Output
+[0, -5, -7, -10, 10]
+[10]
+``` 
+
+## `closures`
+
+- closure is a technique which allows the storing of values in spite of the fact that the context in which they have been created does not exist anymore
+- Example - The function returned during the `outer()` invocation is a closure.
+
+    ```python
+    def outer(par):
+        loc = par
+        def inner():
+            return loc
+        return inner
+
+    var = 1
+    fun = outer(var)
+    print(fun())
+
+    ## Ex 2 - A closure has to be invoked in exactly the same way in which it has been declared
     
+    def makeclosure(par):
+        loc = par
+        def power(p):
+            return p ** loc
+        return power
+
+    fsqr = makeclosure(2)
+    fcub = makeclosure(3)
+    for i in range(5):
+        print(i, fsqr(i), fcub(i))
+    ```
 # Files
 
 ```python
