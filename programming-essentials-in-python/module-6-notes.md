@@ -241,15 +241,15 @@ print(obj1.var)
 - `Multiple inheritance`
     - <b>Diamond</b> problem may cause `MRO` (Method Resolution Error)
     - Subclass has more than one Super classes.
+    - Python looks for object components in the following order:
+        - inside the object itself;
+        - in its superclasses, `from bottom to top`
+        - if there is more than one class on a particular inheritance path, Python scans them from `left to right`.
+
 - `Object composition`
     - Preferred over multiple inheritance.
     - `polymorphism` can be achieved better.
     - One Super class is used by more than one sub class.
-- occurs when a class has more than one superclass
-- Python looks for object components in the following order:
-    - inside the object itself;
-    - in its superclasses, `from bottom to top`
-    - if there is more than one class on a particular inheritance path, Python scans them from `left to right`.
 
 `polymorphism`
 
