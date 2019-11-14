@@ -135,6 +135,7 @@ lst.reverse()
 ## `Slicing`:
 - to copy a list or part of the list, you can do it by performing `slicing`
 - can use negative indices to perform slices
+- syntax: `start:stop:step`
 
 ```python
 myList = [10, 8, 6, 4, 2]
