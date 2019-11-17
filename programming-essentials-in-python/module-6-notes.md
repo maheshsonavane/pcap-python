@@ -413,7 +413,7 @@ print(obj1.var)
 
 ## `yield`:
 - Turns the function into generator.
-- function should not be invoked explicitly
+- function should not be invoked explicitly as it will return generator object which need to be iterated.
 
     ```python
     def fun(n):
