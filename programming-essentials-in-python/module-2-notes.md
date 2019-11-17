@@ -23,7 +23,7 @@ print(0.4)
 print(.4) 
 print(3e10) # scientific notation
 print(type(3E10)) # one more way to declare float
-print(0.0000000000000000000001) # 1e-22
+print(0.0000000000000000000001) # 1e-22 # till 3 zeros e.g. 0.0001
 
 # String literal
 print('I am "Mahesh Sonavane"') # using single quotes
