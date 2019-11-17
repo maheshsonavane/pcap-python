@@ -563,11 +563,15 @@ name = "/dir/file"
 name = "/dir/file"
 name = "c:/dir/file"
 ```
+- Unix/Linux system file names are case-sensitive.
+- Windows systems store the case of letters used in the file name, but don't distinguish between their cases at all.
+
+## `Streams`
+- Python assumes that every file is hidden behind an object of an adequate class. - An object of an adequate class is created when you open the file and destroyed it at the time of closing. We never use constructors to bring these objects to life. The only way you obtain them is to invoke the function named `open()`.
 
 
-## `File Streams`
-
-- default mode is `rt`.<br/><br/>
+- default mode is `rt`.
+- for reading modes `[rt,r+t,rb,r+b]` file must exist and for other modes file will be created if not exists.<br/><br/>
 
     ![modes](https://user-images.githubusercontent.com/45288730/68545849-734edc00-03ea-11ea-9f1f-c07212477e3c.JPG)
 
@@ -595,15 +599,67 @@ name = "c:/dir/file"
 
 - `UnsupportedOperation`, which inherits `OSError` and `ValueError`, and comes from the `io` module.
 
+### `Pre-opened streams`:
+
+- `sys.stdin`: associated with the keyboard
+- `sys.stdout`: associated with the screen
+- `sys.stderr`: associated with the screen
+- no need to open and close these streams because its implicitely done by python.
+
+### `Diagnosing stream problems`:
+
+![strem-errors2](https://user-images.githubusercontent.com/45288730/69005109-84da3b80-0936-11ea-8f60-eedecb82df4a.JPG)
 
 
+### `Reading and Writing`:
 
-## `bytearray`:
+- `text files`:
+    - character by character
+    - line by line
 
-- Amorphous data is data which have no specific shape or form - they are just a series of bytes.
-- specialized class Python uses to store amorphous data.
-- mutable, 
-- they're a subject of the len() function, 
+- `binary files`:
+    - block by block
+    - byte by byte
+
+- `translation of newline characters process`
+    - only for windows not for unix.
+
+reading files
+```python
+# Input file
+Line 1
+Line 2
+Line 3
+
+#----using read() - whole file to the memory at once
+Line 1
+Line 2
+Line 3
+#----using read(2) - 2 characters 
+Li
+#----using readline() - 1 line 
+Line 1
+
+#----using readlines() - Lines as list elements
+['Line 1\n', 'Line 2\n', 'Line 3']
+#----using for line in open('text.txt', 'rt'): - line by line
+Line 1
+Line 2
+Line 3
+```
+writing files
+
+- `write` method: 
+    - expects just one argument - a string that will be transferred to an opened file. 
+    - line by line or character by character
+    - No newline character is added to the write()'s argument, so you have to add it yourself if you want the file to be filled with a number of lines.
+
+### `Writing binary files` 
+
+`bytearray`:
+
+- specialized `class` Python uses to store amorphous data.
+- mutable , they're a subject of the len() function, 
 - conventional indexing is possible
 - `IMP` - you mustn't set any byte array elements with a value which is not an integer. violating this rule will cause a `TypeError` exception.
 - not allowed to assign a value that doesn't come from the range `0` to `255` inclusive.
@@ -611,14 +667,14 @@ name = "c:/dir/file"
 ```python
 data = bytearray(100) # bytearray object able to store ten bytes.
 
-
 data = bytearray(10)
 print(data) # bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
 print(len(data)) #10
 ```
-### `writing byetarray to file`
+#### `write()` writing byetarray to file
 
-- The `write()` method returns a number of successfully written bytes.
+- The method returns number of successfully written bytes.
+
     ```python
     from os import strerror
     data = bytearray(10)
@@ -629,7 +685,7 @@ print(len(data)) #10
     except IOError as e:
         print("I/O error occurred:", strerr(e.errno))
     ```
-### `readinto(b)` - read bytes from a stream
+#### `readinto(b)` - read bytes from a stream
 - Read bytes into a pre-allocated, writable bytes-like object b, and return the number of bytes read.
 
     ```python
@@ -647,10 +703,8 @@ print(len(data)) #10
     except IOError as e:
         print("I/O error occurred:", strerr(e.errno))
     ```
-### `read()` - read bytes from a stream
+#### `read()` - read bytes from a stream
 - Read all the contents of the file into the `memory.`
-- don't use this kind of read if you're not sure that the file's contents will fit the available memory.
-
 
     ```python
     from os import strerror
@@ -666,9 +720,8 @@ print(len(data)) #10
     except IOError as e:
         print("I/O error occurred:", strerr(e.errno))
     ```
-### `read(n)` - read bytes from a stream
+#### `read(n)` - read bytes from a stream
 - If the read() method is invoked with an argument, it specifies the maximum number of bytes to be read.
-
 
     ```python
     try:
