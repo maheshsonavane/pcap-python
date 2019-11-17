@@ -24,7 +24,9 @@ print(.4)
 print(3e10) # scientific notation
 print(type(3E10)) # one more way to declare float
 print(0.0000000000000000000001) # 1e-22
-
+print(34.23)
+print(0.3423e2) # 0.3423 * (10 raised to 2) # 34.23
+print(3423e-2) # 3423 * (1/10 raised to 2) # 34.23
 # String literal
 print('I am "Mahesh Sonavane"') # using single quotes
 print("I am \"Mahesh Sonavane\"") # using escape character
