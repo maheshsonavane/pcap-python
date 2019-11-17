@@ -663,7 +663,6 @@ writing files
 - conventional indexing is possible
 - `IMP` - you mustn't set any byte array elements with a value which is not an integer. violating this rule will cause a `TypeError` exception.
 - not allowed to assign a value that doesn't come from the range `0` to `255` inclusive.
-- 
 ```python
 data = bytearray(100) # bytearray object able to store ten bytes.
 
